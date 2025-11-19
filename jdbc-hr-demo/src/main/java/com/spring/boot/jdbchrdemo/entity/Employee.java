@@ -5,14 +5,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class Employee {
     private long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private double salary;
 
     public Employee() {
     }
-    public Employee(long id, String name, double salary) {
+    public Employee(long id, String firstName, String lastName, double salary) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.salary = salary;
     }
 
@@ -24,12 +26,20 @@ public class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public double getSalary() {

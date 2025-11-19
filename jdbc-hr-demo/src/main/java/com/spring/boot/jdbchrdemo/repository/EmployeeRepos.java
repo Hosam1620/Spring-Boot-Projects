@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface EmployeeRepos {
 
-    int count();
+    Integer count();
     Employee findById(long id);
     List<Employee> findAll();
-    int insert(Employee employee);
-    int update(Employee employee);
-    int delete(long id);
+    Integer insert(Employee employee);
+    Integer update(Employee employee);
+    Integer delete(long id);
 }
