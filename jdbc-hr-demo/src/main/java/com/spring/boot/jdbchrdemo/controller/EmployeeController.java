@@ -3,6 +3,8 @@ package com.spring.boot.jdbchrdemo.controller;
 import com.spring.boot.jdbchrdemo.entity.Employee;
 import com.spring.boot.jdbchrdemo.repository.EmployeeRepos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +15,13 @@ public class EmployeeController {
 
     private final EmployeeRepos employeeRepos;
 
+    private final EmployeeRepos employeeRepo;
     @Autowired
-    public EmployeeController(EmployeeRepos employeeRepos) {
+    public EmployeeController(@Qualifier("EmployeeJDBCRepo")EmployeeRepos employeeRepos,@Qualifier("EmployeeNamedParameterJDBCRepo") EmployeeRepos employeeRepo) {
         this.employeeRepos = employeeRepos;
+        this.employeeRepo = employeeRepo;
     }
+
 
     @GetMapping("/count")
     public int CountEmployee() {
@@ -43,8 +48,14 @@ public class EmployeeController {
     public int update(@RequestParam long id, @RequestParam String firstname, @RequestParam String lastname, @RequestParam double salary) {
         return employeeRepos.update(new Employee(id, firstname, lastname, salary));
     }
+
     @GetMapping("/delete")
     public int delete(@RequestParam long id) {
         return employeeRepos.delete(id);
+    }
+
+    @GetMapping("/insertwithnamedparameter")
+    public int insertbyname(@RequestParam long id,@RequestParam String firstname, @RequestParam String lastname, @RequestParam double salary) {
+        return employeeRepo.insert(new Employee(id, firstname, lastname, salary));
     }
 }

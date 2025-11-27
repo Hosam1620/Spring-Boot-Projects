@@ -4,6 +4,7 @@ import com.spring.boot.jdbchrdemo.entity.Employee;
 import com.spring.boot.jdbchrdemo.mapper.EmployeeMapper;
 import com.spring.boot.jdbchrdemo.repository.EmployeeRepos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Repository
+@Qualifier("EmployeeJDBCRepo")
 public class EmployeeJDBCRepo implements EmployeeRepos {
 
 
@@ -69,4 +71,5 @@ public class EmployeeJDBCRepo implements EmployeeRepos {
         String sql="delete from employee where Employee_id=?";
         return jdbcTemplate.update(sql,id);
     }
+
 }
